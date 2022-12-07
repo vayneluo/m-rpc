@@ -22,6 +22,24 @@
 
     <dependencies>
         <dependency>
+            <groupId>me.lattice.mrpc</groupId>
+            <artifactId>mrpc-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>me.lattice.mrpc</groupId>
+            <artifactId>mrpc-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.36</version>
+        </dependency>
+
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>

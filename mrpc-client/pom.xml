@@ -19,6 +19,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>me.lattice.mrpc</groupId>
+			<artifactId>mrpc-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>me.lattice.mrpc</groupId>
+			<artifactId>mrpc-api</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
