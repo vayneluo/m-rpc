@@ -2,7 +2,7 @@ package me.lattice.mrpc.webservice.ping;
 
 import lombok.extern.slf4j.Slf4j;
 import me.lattice.mrpc.api.ping.IPingWebService;
-import me.lattice.mrpc.core.annotation.MRpcService;
+import me.lattice.mrpc.webservice.annotation.MRpcService;
 
 /**
  * @description: Ping Web Service Implementation For Client To Ping Server
@@ -10,7 +10,7 @@ import me.lattice.mrpc.core.annotation.MRpcService;
  * @date: 2022/12/7 5:30 PM
  */
 @Slf4j
-@MRpcService(name = "pingWebService", version = "1.0.0")
+@MRpcService(serviceName = IPingWebService.class, version = "1.0.0")
 public class PingWebServiceImpl implements IPingWebService {
 
     @Override

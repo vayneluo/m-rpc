@@ -1,4 +1,6 @@
-package me.lattice.mrpc.core.annotation;
+package me.lattice.mrpc.webservice.annotation;
+
+import org.springframework.stereotype.Component;
 
 import java.lang.annotation.*;
 
@@ -10,13 +12,14 @@ import java.lang.annotation.*;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({java.lang.annotation.ElementType.TYPE})
+@Component
 public @interface MRpcService {
 
     /**
      * Service Name Interface
      * @return Service Name
      */
-    String name() default "";
+    Class<?> serviceName() default Object.class;
 
     /**
      * Service Version
