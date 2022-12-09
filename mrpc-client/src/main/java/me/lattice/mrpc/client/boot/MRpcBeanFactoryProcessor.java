@@ -3,6 +3,7 @@ package me.lattice.mrpc.client.boot;
 import lombok.extern.slf4j.Slf4j;
 import me.lattice.mrpc.client.annotation.MRpcReference;
 import me.lattice.mrpc.client.bean.MRpcProxyBean;
+import me.lattice.mrpc.core.constants.MRpcBeanConstant;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -88,6 +89,7 @@ public class MRpcBeanFactoryProcessor implements ApplicationContextAware, BeanCl
         MRpcReference mRpcReference = AnnotationUtils.getAnnotation(field, MRpcReference.class);
         if (Objects.nonNull(mRpcReference)) {
             BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(MRpcProxyBean.class);
+            builder.setInitMethodName(MRpcBeanConstant.PROXY_BEAN_INIT_METHOD_NAME);
             builder.addPropertyValue("interfaceClass", field.getType());
             builder.addPropertyValue("registryType", mRpcReference.registryType());
             builder.addPropertyValue("registryAddress", mRpcReference.registryAddress());
