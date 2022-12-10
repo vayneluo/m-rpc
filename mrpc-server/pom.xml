@@ -22,10 +22,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
             <groupId>me.lattice.mrpc</groupId>
             <artifactId>mrpc-api</artifactId>
         </dependency>
@@ -42,20 +38,10 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.36</version>
         </dependency>
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-all</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-framework</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
