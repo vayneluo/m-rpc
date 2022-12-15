@@ -32,7 +32,7 @@ public class MRpcRequestHandler extends SimpleChannelInboundHandler<MRpcProtocol
             try {
                 // RPC服务调用
                 Object result = handle(request);
-                response.setRequestId(request.getRequestId());
+                response.setRequestId(header.getRequestId());
                 response.setData(result);
 
                 header.setStatus(MessageStatusEnum.SUCCESS.getStatus());
