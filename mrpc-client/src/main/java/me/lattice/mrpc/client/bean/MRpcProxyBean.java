@@ -1,7 +1,12 @@
 package me.lattice.mrpc.client.bean;
 
 import lombok.Data;
+import me.lattice.mrpc.core.enums.RegistryTypeEnum;
+import me.lattice.mrpc.registry.core.MRpcRegistryService;
+import me.lattice.mrpc.registry.core.RegistryFactory;
 import org.springframework.beans.factory.FactoryBean;
+
+import java.lang.reflect.Proxy;
 
 /**
  * @description: 代理对象 Bean
@@ -33,8 +38,10 @@ public class MRpcProxyBean implements FactoryBean<Object> {
     private Object proxyObject;
 
     public void init() throws Exception{
-        // todo 动态代理创建代理对象
-        // proxyObject = MRpcProxyFactory.createProxy(interfaceClass, registryType, registryAddress, version, readTimeout, connectTimeout);
+        // JDK动态代理创建代理对象
+        MRpcRegistryService registryService = RegistryFactory.createRegistryService(RegistryTypeEnum.lookUp(this.registryType), this.registryAddress);
+        this.proxyObject = Proxy.newProxyInstance(this.getClass().getClassLoader(), new Class[]{this.interfaceClass}
+                , new MRpcInvocationHandler(registryService, this.version, this.readTimeout, this.connectTimeout));
     }
 
     @Override

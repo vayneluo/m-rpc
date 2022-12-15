@@ -7,7 +7,7 @@ package me.lattice.mrpc.core.enums;
  */
 public enum RegistryTypeEnum {
 
-    ZK("zookeeper"),
+    ZOOKEEPER("zookeeper"),
 
     NACOS("nacos"),
 

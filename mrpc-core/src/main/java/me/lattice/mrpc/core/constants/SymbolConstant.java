@@ -14,4 +14,5 @@ public class SymbolConstant {
     public static final String DASH = "-";
 
     public static final String SLASH = "/";
+    public static final String HYPHEN = "#";
 }

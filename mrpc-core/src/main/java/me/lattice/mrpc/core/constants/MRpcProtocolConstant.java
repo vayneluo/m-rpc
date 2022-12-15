@@ -15,5 +15,10 @@ public class MRpcProtocolConstant {
     /**
      * MRpc协议魔数
      */
-    public static final short MAGIC_NUMBER = 0x1234;
+    public static final short MAGIC_NUMBER = 0x1993;
+
+    /**
+     * MRpc协议版本号
+     */
+    public static final byte VERSION = 0x01;
 }

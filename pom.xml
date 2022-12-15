@@ -47,6 +47,11 @@
                 <artifactId>mrpc-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>me.lattice.mrpc</groupId>
+                <artifactId>mrpc-nameserver</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!-- 外部依赖 -->
             <dependency>
                 <groupId>io.netty</groupId>

@@ -13,11 +13,6 @@ import java.io.Serializable;
 public class MRpcRequest implements Serializable {
 
     /**
-     * 请求ID
-     */
-    private long requestId;
-
-    /**
      * 接口名称
      */
     private String interfaceName;

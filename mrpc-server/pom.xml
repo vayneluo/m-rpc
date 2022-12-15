@@ -30,6 +30,10 @@
             <artifactId>mrpc-core</artifactId>
         </dependency>
         <dependency>
+            <groupId>me.lattice.mrpc</groupId>
+            <artifactId>mrpc-nameserver</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
@@ -39,10 +43,6 @@
             <version>1.7.36</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.curator</groupId>
-            <artifactId>curator-framework</artifactId>
-        </dependency>
     </dependencies>
 
     <build>

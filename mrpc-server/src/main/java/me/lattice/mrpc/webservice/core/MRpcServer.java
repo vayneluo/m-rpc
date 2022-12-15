@@ -8,6 +8,9 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import lombok.extern.slf4j.Slf4j;
 import me.lattice.mrpc.core.constants.SymbolConstant;
+import me.lattice.mrpc.core.meta.ServiceMetadata;
+import me.lattice.mrpc.core.util.MRpcServiceHelper;
+import me.lattice.mrpc.registry.core.MRpcRegistryService;
 import me.lattice.mrpc.webservice.annotation.MRpcService;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
@@ -27,11 +30,11 @@ import java.util.Objects;
 public class MRpcServer implements InitializingBean, BeanPostProcessor {
 
     /** 服务暴露端口 **/
-    private int serverPort;
+    private final int serverPort;
     /** 注册服务可插拔式 **/
-    private MRpcRegistryService registryService;
+    private final MRpcRegistryService registryService;
     /** 缓存所有服务Bean **/
-    private Map<String, Object> serviceMap = new HashMap<>();
+    private final Map<String, Object> serviceMap = new HashMap<>();
 
     /** 服务注册表 **/
     public MRpcServer(int serverPort, MRpcRegistryService registryService) {
@@ -90,12 +93,16 @@ public class MRpcServer implements InitializingBean, BeanPostProcessor {
             try {
                 String serviceName = mRpcService.serviceName().getName();
                 String version = mRpcService.version();
-                String serviceNameVersion = serviceName + SymbolConstant.DASH + version;
+                String serviceKey = MRpcServiceHelper.buildServiceName(serviceName, version);
+                ServiceMetadata metadata = new ServiceMetadata();
+                metadata.setServiceName(serviceKey);
+                metadata.setServiceAddress(InetAddress.getLocalHost().getHostAddress());
+                metadata.setServicePort(serverPort);
                 // register service
-                registryService.registerService();
+                registryService.register(metadata);
                 // cache service bean
-                serviceMap.put(serviceNameVersion, bean);
-                log.info("register service: {}", serviceNameVersion);
+                serviceMap.put(serviceKey, bean);
+                log.info("register service: {}", serviceKey);
             } catch (Exception e) {
                 log.error("register service error: {}", e.getMessage());
             }
