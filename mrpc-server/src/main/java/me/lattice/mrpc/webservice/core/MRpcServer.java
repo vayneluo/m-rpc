@@ -83,10 +83,10 @@ public class MRpcServer implements InitializingBean, BeanPostProcessor {
                         }
                     }).childOption(ChannelOption.SO_KEEPALIVE, true);
             Channel channel = serverBootstrap.bind(hostAddress, serverPort).sync().channel();
-            log.info("mRpc server started on {}:{}", hostAddress, serverPort);
+            log.info("MRpc server started on {}:{}", hostAddress, serverPort);
             channel.closeFuture().sync();
         } catch (InterruptedException e) {
-            log.error("mRpc server start error: {}", e.getMessage());
+            log.error("MRpc server start error: {}", e.getMessage());
         } finally {
             boss.shutdownGracefully();
             worker.shutdownGracefully();

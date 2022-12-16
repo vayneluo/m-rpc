@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  * @date: 2022/12/8 5:37 PM
  */
 @Configuration
-@EnableConfigurationProperties({MRpcServerProperties.class, MRpcRegistryService.class})
+@EnableConfigurationProperties({MRpcServerProperties.class, MRpcRegistryProperties.class})
 public class MRpcServerConfiguration {
 
     @Resource
@@ -29,7 +29,7 @@ public class MRpcServerConfiguration {
     public MRpcServer mRpcServer() throws Exception {
         RegistryTypeEnum registryTypeEnum = RegistryTypeEnum.lookUp(registryProperties.getType());
         MRpcRegistryService registryService = RegistryFactory.createRegistryService(registryTypeEnum, registryProperties.getAddress());
-        return new MRpcServer(serverProperties.getServerPort(), registryService);
+        return new MRpcServer(serverProperties.getPort(), registryService);
     }
 
 }

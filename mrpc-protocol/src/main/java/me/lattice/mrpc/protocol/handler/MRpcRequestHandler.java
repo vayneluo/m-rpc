@@ -23,6 +23,7 @@ import java.util.Objects;
 /**
  * @description: MRpc Request Handler/ Inbound处理器
  * @author: lattice
+ * @see me.lattice.mrpc.protocol.codec.MRpcMessageDecoder
  * @date: 2022/12/12 20:38
  */
 @Slf4j
@@ -47,7 +48,7 @@ public class MRpcRequestHandler extends SimpleChannelInboundHandler<MRpcProtocol
             MRpcRequest request = msg.getBody();
             log.info("Receive request: {}", request);
             try {
-                // RPC服务调用
+                // todo RPC服务调用
                 Object result = handle(request);
                 response.setData(result);
 

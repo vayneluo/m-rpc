@@ -10,12 +10,11 @@ import org.springframework.stereotype.Component;
  * @date: 2022/12/8 12:53 PM
  */
 @Data
-@Component
 @ConfigurationProperties(prefix = "mrpc.server")
 public class MRpcServerProperties {
 
     /** 服务暴露端口 **/
-    private int serverPort;
+    private int port;
 
 
 

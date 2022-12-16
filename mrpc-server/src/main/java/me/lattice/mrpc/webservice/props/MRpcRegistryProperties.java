@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
  * @date: 2022/12/8 1:41 PM
  */
 @Data
-@Component
 @ConfigurationProperties(prefix = "mrpc.registry")
 public class MRpcRegistryProperties {
 

@@ -12,6 +12,7 @@ import me.lattice.mrpc.core.meta.ServiceMetadata;
 import me.lattice.mrpc.core.util.MRpcServiceHelper;
 import me.lattice.mrpc.protocol.codec.MRpcMessageDecoder;
 import me.lattice.mrpc.protocol.codec.MRpcMessageEncoder;
+import me.lattice.mrpc.protocol.handler.MRpcResponseHandler;
 import me.lattice.mrpc.protocol.transport.MRpcProtocol;
 import me.lattice.mrpc.protocol.transport.MRpcRequestHolder;
 import me.lattice.mrpc.registry.core.MRpcRegistryService;
@@ -41,7 +42,7 @@ public class MRpcClient {
                         nioSocketChannel.pipeline()
                                 .addLast(new MRpcMessageEncoder())
                                 .addLast(new MRpcMessageDecoder())
-                        ;
+                                .addLast(new MRpcResponseHandler());
                     }
                 });
     }
