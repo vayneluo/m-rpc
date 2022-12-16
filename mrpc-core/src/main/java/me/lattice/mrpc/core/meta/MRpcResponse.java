@@ -13,11 +13,6 @@ import java.io.Serializable;
 public class MRpcResponse implements Serializable {
 
     /**
-     * 请求ID
-     */
-    private long requestId;
-
-    /**
      * 响应结果
      */
     private Object data;

@@ -10,7 +10,7 @@ import me.lattice.mrpc.webservice.annotation.MRpcService;
  * @date: 2022/12/7 5:30 PM
  */
 @Slf4j
-@MRpcService(serviceName = IPingWebService.class, version = "1.0.0")
+@MRpcService(serviceName = IPingWebService.class, version = "1.0")
 public class PingWebServiceImpl implements IPingWebService {
 
     @Override

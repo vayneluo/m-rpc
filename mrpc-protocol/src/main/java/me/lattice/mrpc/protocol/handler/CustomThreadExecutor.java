@@ -21,8 +21,8 @@ public class CustomThreadExecutor {
         if (null == executor) {
             synchronized (CustomThreadExecutor.class) {
                 if (null == executor) {
-                    executor = new ThreadPoolExecutor(16, 16, 60L,
-                            TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(Integer.MAX_VALUE));
+                    executor = new ThreadPoolExecutor(2, 8, 30L,
+                            TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(1000));
                 }
             }
         }

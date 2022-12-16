@@ -25,5 +25,5 @@ public @interface MRpcService {
      * Service Version
      * @return Service Version
      */
-    String version() default "";
+    String version() default "1.0";
 }

@@ -3,6 +3,7 @@ package me.lattice.mrpc.webservice.core;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -10,6 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import me.lattice.mrpc.core.constants.SymbolConstant;
 import me.lattice.mrpc.core.meta.ServiceMetadata;
 import me.lattice.mrpc.core.util.MRpcServiceHelper;
+import me.lattice.mrpc.protocol.codec.MRpcMessageDecoder;
+import me.lattice.mrpc.protocol.codec.MRpcMessageEncoder;
+import me.lattice.mrpc.protocol.handler.MRpcRequestHandler;
 import me.lattice.mrpc.registry.core.MRpcRegistryService;
 import me.lattice.mrpc.webservice.annotation.MRpcService;
 import org.springframework.beans.BeansException;
@@ -72,9 +76,12 @@ public class MRpcServer implements InitializingBean, BeanPostProcessor {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
-                            //ch.pipeline().addLast(new MRpcServerHandler(serviceMap));
+                            ch.pipeline()
+                                    .addLast(new MRpcMessageEncoder())
+                                    .addLast(new MRpcMessageDecoder())
+                                    .addLast(new MRpcRequestHandler(serviceMap));
                         }
-                    });
+                    }).childOption(ChannelOption.SO_KEEPALIVE, true);
             Channel channel = serverBootstrap.bind(hostAddress, serverPort).sync().channel();
             log.info("mRpc server started on {}:{}", hostAddress, serverPort);
             channel.closeFuture().sync();
