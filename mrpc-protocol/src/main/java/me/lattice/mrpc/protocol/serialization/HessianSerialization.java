@@ -36,7 +36,7 @@ public class HessianSerialization implements MRpcSerialization {
     @SuppressWarnings("unchecked")
     @Override
     public <T> T deserialize(byte[] data, Class<T> clazz) {
-        if (null == data) {
+        if (null == data || data.length == 0) {
             throw new NullPointerException();
         }
         T result;

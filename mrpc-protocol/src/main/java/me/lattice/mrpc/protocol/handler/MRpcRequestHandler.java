@@ -48,7 +48,7 @@ public class MRpcRequestHandler extends SimpleChannelInboundHandler<MRpcProtocol
             MRpcRequest request = msg.getBody();
             log.info("Receive request: {}", request);
             try {
-                // todo RPC服务调用
+                // RPC服务调用
                 Object result = handle(request);
                 response.setData(result);
 
@@ -62,8 +62,8 @@ public class MRpcRequestHandler extends SimpleChannelInboundHandler<MRpcProtocol
                 response.setMessage(throwable.getMessage());
                 log.error("RPC Server handle request error", throwable);
             }
+            ctx.writeAndFlush(responseProtocol);
         });
-        ctx.writeAndFlush(msg);
     }
 
     /**

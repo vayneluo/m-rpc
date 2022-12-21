@@ -1,9 +1,11 @@
 package me.lattice.mrpc.registry.core.impl;
 
 import me.lattice.mrpc.core.constants.ZookeeperConstant;
+import me.lattice.mrpc.core.enums.LoadBalanceStrategy;
 import me.lattice.mrpc.core.meta.ServiceMetadata;
 import me.lattice.mrpc.core.util.MRpcServiceHelper;
 import me.lattice.mrpc.registry.core.MRpcRegistryService;
+import me.lattice.mrpc.registry.loadbalance.LoadBalanceFactory;
 import me.lattice.mrpc.registry.loadbalance.impl.ZKConsistentHashLoadBalancer;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
@@ -38,7 +40,7 @@ public class ZKRegistryService implements MRpcRegistryService {
     @Override
     public void register(ServiceMetadata metadata) throws Exception {
         ServiceInstance<ServiceMetadata> serviceInstance = ServiceInstance.<ServiceMetadata>builder()
-                .name(MRpcServiceHelper.buildServiceName(metadata.getServiceName(), metadata.getVersion()))
+                .name(metadata.getServiceName())
                 .address(metadata.getServiceAddress())
                 .port(metadata.getServicePort())
                 .payload(metadata)
@@ -53,11 +55,11 @@ public class ZKRegistryService implements MRpcRegistryService {
     }
 
     @Override
-    public ServiceMetadata discovery(String serviceName, int hashcode) throws Exception {
+    public ServiceMetadata discovery(String serviceName, int hashcode, String loadBalance) throws Exception {
         Collection<ServiceInstance<ServiceMetadata>> serviceInstances = this.serviceDiscovery.queryForInstances(serviceName);
         // todo 1.后续可优化成指定负载均衡策略，默认走一致性哈希
         // todo 2.不区分注册中心，负载均衡的策略不因为注册中心的不同而不同
-        ServiceInstance<ServiceMetadata> instance = new ZKConsistentHashLoadBalancer()
+        ServiceInstance<ServiceMetadata> instance = LoadBalanceFactory.getLoadBalancer(LoadBalanceStrategy.RANDOM)
                 .select((List<ServiceInstance<ServiceMetadata>>) serviceInstances, hashcode);
         return instance.getPayload();
     }

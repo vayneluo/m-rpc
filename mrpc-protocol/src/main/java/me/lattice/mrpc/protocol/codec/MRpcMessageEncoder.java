@@ -40,9 +40,10 @@ public class MRpcMessageEncoder extends MessageToByteEncoder<MRpcProtocol<Object
         byteBuf.writeByte(header.getStatus());
         // 请求ID
         byteBuf.writeLong(header.getRequestId());
+        byte[] data = serialization.serialize(mRpcProtocol.getBody());
         // 数据长度
-        byteBuf.writeInt(header.getDataLength());
+        byteBuf.writeInt(data.length);
         // 自定义协议体
-        byteBuf.writeBytes(serialization.serialize(mRpcProtocol.getBody()));
+        byteBuf.writeBytes(data);
     }
 }

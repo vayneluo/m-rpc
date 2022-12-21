@@ -51,9 +51,9 @@ public class MRpcClient {
         MRpcRequest request = protocol.getBody();
         Object[] parameters = request.getParameters();
         String serviceName = MRpcServiceHelper.buildServiceName(request.getInterfaceName(), request.getVersion());
-        int hashcode = parameters.length == 0 ? parameters[0].hashCode() : serviceName.hashCode();
+        int hashcode = parameters.length > 0 ? parameters[0].hashCode() : serviceName.hashCode();
         // 1. 从注册中心获取服务提供者地址
-        ServiceMetadata metadata = registryService.discovery(serviceName, hashcode);
+        ServiceMetadata metadata = registryService.discovery(serviceName, hashcode, "");
         if (Objects.nonNull(metadata)) {
             // 2. 通过Netty发送请求
             ChannelFuture future = bootstrap.connect(metadata.getServiceAddress(), metadata.getServicePort()).sync();

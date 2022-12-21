@@ -4,6 +4,7 @@ import io.netty.channel.DefaultEventLoop;
 import io.netty.util.concurrent.DefaultPromise;
 import me.lattice.mrpc.client.boot.MRpcClient;
 import me.lattice.mrpc.core.constants.MRpcProtocolConstant;
+import me.lattice.mrpc.core.enums.MessageStatusEnum;
 import me.lattice.mrpc.core.enums.MessageTypeEnum;
 import me.lattice.mrpc.core.enums.ProtocolEnum;
 import me.lattice.mrpc.core.enums.SerializationEnum;
@@ -51,7 +52,7 @@ public class MRpcInvocationHandler implements InvocationHandler {
         header.setMagicNumber(MRpcProtocolConstant.MAGIC_NUMBER);
         header.setMessageType(MessageTypeEnum.REQUEST.getCode());
         header.setSerializationType((byte) SerializationEnum.HESSIAN.getSerializeType());
-        header.setStatus((byte) 0x1);
+        header.setStatus(MessageStatusEnum.SUCCESS.getStatus());
         header.setVersion(MRpcProtocolConstant.VERSION);
         header.setRequestId(reqId);
         request.setHeader(header);
@@ -63,6 +64,7 @@ public class MRpcInvocationHandler implements InvocationHandler {
         body.setParameters(args);
         body.setParameterTypes(method.getParameterTypes());
         request.setBody(body);
+
 
         // 3. 发送请求
         MRpcClient client = new MRpcClient();

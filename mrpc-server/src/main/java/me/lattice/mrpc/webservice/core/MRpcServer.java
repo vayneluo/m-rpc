@@ -103,6 +103,7 @@ public class MRpcServer implements InitializingBean, BeanPostProcessor {
                 String serviceKey = MRpcServiceHelper.buildServiceName(serviceName, version);
                 ServiceMetadata metadata = new ServiceMetadata();
                 metadata.setServiceName(serviceKey);
+                metadata.setVersion(version);
                 metadata.setServiceAddress(InetAddress.getLocalHost().getHostAddress());
                 metadata.setServicePort(serverPort);
                 // register service

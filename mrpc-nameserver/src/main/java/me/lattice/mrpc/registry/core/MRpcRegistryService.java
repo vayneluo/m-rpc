@@ -13,7 +13,7 @@ public interface MRpcRegistryService {
 
      void unregister(ServiceMetadata metadata) throws Exception;
 
-     ServiceMetadata discovery(String serviceName, int hashcode) throws Exception;
+     ServiceMetadata discovery(String serviceName, int hashcode, String loadBalance) throws Exception;
 
      void remove() throws Exception;
 }

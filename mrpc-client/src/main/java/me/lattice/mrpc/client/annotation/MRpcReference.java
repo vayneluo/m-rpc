@@ -1,5 +1,8 @@
 package me.lattice.mrpc.client.annotation;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
 import java.lang.annotation.*;
 
 /**
@@ -10,13 +13,14 @@ import java.lang.annotation.*;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
+@Autowired
 public @interface MRpcReference {
 
     /**
      * Service Reference Version, default latest version
      * @return Service Reference Version
      */
-    String version() default "1.0.0";
+    String version() default "1.0";
 
     String registryType() default "zookeeper";
 

@@ -77,6 +77,7 @@ public class MRpcBeanFactoryProcessor implements ApplicationContextAware, BeanCl
                 throw new IllegalArgumentException("The bean name " + beanName + " is already used!");
             }
             registry.registerBeanDefinition(beanName, beanDefinition);
+            log.info("register bean: {} success", beanName);
         });
     }
 
