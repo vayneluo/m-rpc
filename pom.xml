@@ -20,6 +20,7 @@
         <module>mrpc-client</module>
         <module>mrpc-server</module>
         <module>mrpc-api</module>
+        <module>mrpc-examples</module>
     </modules>
 
     <properties>
